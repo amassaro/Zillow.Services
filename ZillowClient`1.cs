@@ -361,7 +361,7 @@ namespace Zillow.Services
                 comps comps = await CallAPIAsync<comps>(ZillowURI.DEEPCOMPS, p);
 
                 if (comps == null)
-                    throw new NullReferenceException("searchresults API value is null");
+                    throw new NullReferenceException("comps API value is null");
 
                 if (int.Parse(comps.message.code) != 0)
                     throw new Exception(string.Format("Zillow Error #{0}: {1}", comps.message.code, comps.message.text));
@@ -388,7 +388,7 @@ namespace Zillow.Services
                 updatedPropertyDetails upd = await CallAPIAsync<updatedPropertyDetails>(ZillowURI.UPDATEDPROPERTYDETAILS, p);
 
                 if (upd == null)
-                    throw new NullReferenceException("searchresults API value is null");
+                    throw new NullReferenceException("updatedPropertyDetails API value is null");
 
                 if (int.Parse(upd.message.code) != 0)
                     throw new Exception(string.Format("Zillow Error #{0}: {1}", upd.message.code, upd.message.text));
