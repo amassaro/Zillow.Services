@@ -62,16 +62,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IZillowClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schema\Chart.cs" />
-    <Compile Include="Schema\Comps.cs" />
-    <Compile Include="Schema\RegionChart.cs" />
-    <Compile Include="Schema\SearchResults.cs" />
-    <Compile Include="Schema\Zestimate.cs" />
-    <Compile Include="Schema\ZillowTypes.cs" />
+    <Compile Include="Schema\ZillowSchema.cs" />
     <Compile Include="ZillowClient.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ZillowClient`1.cs" />
+    <Compile Include="ZillowExtensions.cs" />
     <Compile Include="ZillowURI.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,8 +88,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="readme.md" />
+    <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
