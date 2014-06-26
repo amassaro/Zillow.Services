@@ -42,9 +42,9 @@ namespace Zillow.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message, ex);
+                throw ex;
             }
 
-            return default(T);
         }
 
 
@@ -74,7 +74,7 @@ namespace Zillow.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                throw new Exception(ex.Message, ex);
+                throw ex;
             }
         }
 
@@ -101,7 +101,7 @@ namespace Zillow.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                throw new Exception(ex.Message, ex);
+                throw ex;
             }
         }
 
@@ -131,7 +131,7 @@ namespace Zillow.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                throw new Exception(ex.Message, ex);
+                throw ex;
             }
         }
 
@@ -159,7 +159,7 @@ namespace Zillow.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                throw new Exception(ex.Message, ex);
+                throw ex;
             }
         }
 
@@ -194,7 +194,7 @@ namespace Zillow.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                throw new Exception(ex.Message, ex);
+                throw ex;
             }
         }
 
