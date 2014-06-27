@@ -7,7 +7,6 @@ namespace Zillow.Services
     using System.Diagnostics;
     using System.IO;
     using System.Net.Http;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Xml.Serialization;
     using Zillow.Services.Schema;

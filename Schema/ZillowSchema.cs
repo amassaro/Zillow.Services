@@ -13,7 +13,6 @@
 // 
 namespace Zillow.Services.Schema
 {
-    using System.Xml.Serialization;
 
 
     /// <remarks/>
