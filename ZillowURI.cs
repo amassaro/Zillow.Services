@@ -10,27 +10,27 @@ namespace Zillow.Services
 
         // Home Valuation
 
-        public const string SEARCHRESULTS = "http://www.zillow.com/webservice/GetSearchResults.htm";
-        public const string ZESTIMATE = "http://www.zillow.com/webservice/GetZestimate.htm";
-        public const string CHART = "http://www.zillow.com/webservice/GetChart.htm";
-        public const string COMPS = "http://www.zillow.com/webservice/GetComps.htm";
+        public const string SearchResults = "http://www.zillow.com/webservice/GetSearchResults.htm";
+        public const string ZEstimate = "http://www.zillow.com/webservice/GetZestimate.htm";
+        public const string Chart = "http://www.zillow.com/webservice/GetChart.htm";
+        public const string Comps = "http://www.zillow.com/webservice/GetComps.htm";
 
         // Neighboorhood Information
 
-        public const string DEMOGRAPHICS = "http://www.zillow.com/webservice/GetDemographics.htm";
-        public const string REGIONCHILDREN = "http://www.zillow.com/webservice/GetRegionChildren.htm";
-        public const string REGIONCHART = "http://www.zillow.com/webservice/GetRegionChart.htm";
+        public const string DemoGraphics = "http://www.zillow.com/webservice/GetDemographics.htm";
+        public const string RegionChildren = "http://www.zillow.com/webservice/GetRegionChildren.htm";
+        public const string RegionChart = "http://www.zillow.com/webservice/GetRegionChart.htm";
 
         // Property Details
 
-        public const string DEEPSEARCHRESULTS = "http://www.zillow.com/webservice/GetDeepSearchResults.htm";
-        public const string DEEPCOMPS = "http://www.zillow.com/webservice/GetDeepComps.htm";
-        public const string UPDATEDPROPERTYDETAILS = "http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm";
+        public const string DeepSearchResults = "http://www.zillow.com/webservice/GetDeepSearchResults.htm";
+        public const string DeepComps = "http://www.zillow.com/webservice/GetDeepComps.htm";
+        public const string UpdatedPropertyDetails = "http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm";
 
         // Mortgage
 
-        public const string RATESUMMARY = "http://www.zillow.com/webservice/GetRateSummary.htm";
-        public const string MONTHLYPAYMENTS = "http://www.zillow.com/webservice/GetMonthlyPayments.htm";
+        public const string RateSummary = "http://www.zillow.com/webservice/GetRateSummary.htm";
+        public const string MonthlyPayments = "http://www.zillow.com/webservice/GetMonthlyPayments.htm";
 
     }
 
