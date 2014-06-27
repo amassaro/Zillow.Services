@@ -91,7 +91,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LICENSE-MIT" />
+    <None Include="LICENSE" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
