@@ -61,26 +61,22 @@ namespace Zillow.Services
 
         #region Private Methods
 
-        private object CallAPI(string uri, Hashtable parameters, Type t)
+        private string PrepareQuery(Hashtable parameters)
+        {
+            var query = HttpUtility.ParseQueryString(string.Empty);
+
+            foreach (string k in parameters.Keys)
+                query[k] = parameters[k].ToString();
+
+            return query.ToString();
+        }
+
+
+        private T CallAPI<T>(string uri, Hashtable parameters)
         {
             try
             {
-                // Build HttpClient request
-                using (var httpClient = new HttpClient())
-                {
-                    // Read XML and Deserialize Object
-                    var u = new UriBuilder(uri);
-                    var query = HttpUtility.ParseQueryString(string.Empty);
-
-                    foreach (string k in parameters.Keys)
-                        query[k] = parameters[k].ToString();
-
-                    u.Query = query.ToString();
-                    var xml = httpClient.GetStringAsync(u.Uri).Result;
-
-                    XmlSerializer ser = new XmlSerializer(t);
-                    return ser.Deserialize(new StringReader(xml));
-                }
+                return CallAPIAsync<T>(uri, parameters).Result;
             }
             catch (Exception ex)
             {
@@ -89,7 +85,6 @@ namespace Zillow.Services
             }
 
         }
-
         #endregion
 
         #region Public Sync Methods
@@ -98,7 +93,6 @@ namespace Zillow.Services
         {
             try
             {
-
                 Hashtable p = new Hashtable
                 {
                     {"zws-id", Zwsid},
@@ -106,7 +100,7 @@ namespace Zillow.Services
                     {"citystatezip", citystatezip}
                 };
 
-                searchresults search = (searchresults)CallAPI(ZillowURI.SearchResults, p, typeof(searchresults));
+                searchresults search = CallAPI<searchresults>(ZillowURI.SearchResults, p);
 
                 if (search == null)
                     throw new NullReferenceException("searchresults API value is null");
@@ -133,7 +127,7 @@ namespace Zillow.Services
                     {"zpid", zpid}
                 };
 
-                zestimateResultType zestimate = (zestimateResultType)CallAPI(ZillowURI.ZEstimate, p, typeof(zestimateResultType));
+                zestimateResultType zestimate = CallAPI<zestimateResultType>(ZillowURI.ZEstimate, p);
 
                 if (zestimate == null)
                     throw new NullReferenceException("zestimateResultType API value is null");
@@ -163,7 +157,7 @@ namespace Zillow.Services
                     {"height", height}
                 };
 
-                chart c = (chart)CallAPI(ZillowURI.Chart, p, typeof(chart));
+                chart c = CallAPI<chart>(ZillowURI.Chart, p);
 
                 if (c == null)
                     throw new NullReferenceException("chart API value is null");
@@ -191,7 +185,7 @@ namespace Zillow.Services
                     {"count", count}
                 };
 
-                comps c = (comps)CallAPI(ZillowURI.Comps, p, typeof(comps));
+                comps c = CallAPI<comps>(ZillowURI.Comps, p);
 
                 if (c == null)
                     throw new NullReferenceException("comps API value is null");
@@ -226,7 +220,7 @@ namespace Zillow.Services
                     {"chartVariant", chartVariant}
                 };
 
-                regionchart c = (regionchart)CallAPI(ZillowURI.RegionChart, p, typeof(regionchart));
+                regionchart c = CallAPI<regionchart>(ZillowURI.RegionChart, p);
 
                 if (c == null)
                     throw new NullReferenceException("regionchart API value is null");
@@ -256,7 +250,7 @@ namespace Zillow.Services
                     {"neighborhood", neighborhood}
                 };
 
-                demographicsResultType demo = (demographicsResultType)CallAPI(ZillowURI.DemoGraphics, p, typeof(demographicsResultType));
+                demographicsResultType demo = CallAPI<demographicsResultType>(ZillowURI.DemoGraphics, p);
 
                 if (demo == null)
                     throw new NullReferenceException("demographicsResultType API value is null");
@@ -286,7 +280,7 @@ namespace Zillow.Services
                     {"childtype", childtype}
                 };
 
-                regionchildrenResultType rc = (regionchildrenResultType)CallAPI(ZillowURI.RegionChildren, p, typeof(regionchildrenResultType));
+                regionchildrenResultType rc = CallAPI<regionchildrenResultType>(ZillowURI.RegionChildren, p);
 
                 if (rc == null)
                     throw new NullReferenceException("regionchildrenResultType API value is null");
@@ -315,7 +309,7 @@ namespace Zillow.Services
                     {"callback", callback}
                 };
 
-                rateSummaryResultType rs = (rateSummaryResultType)CallAPI(ZillowURI.RateSummary, p, typeof(rateSummaryResultType));
+                rateSummaryResultType rs = CallAPI<rateSummaryResultType>(ZillowURI.RateSummary, p);
 
                 if (rs == null)
                     throw new NullReferenceException("rateSummaryResultType API value is null");
@@ -347,7 +341,7 @@ namespace Zillow.Services
                     {"callback", callback}
                 };
 
-                paymentsSummaryResultType ps = (paymentsSummaryResultType)CallAPI(ZillowURI.RegionChildren, p, typeof(paymentsSummaryResultType));
+                paymentsSummaryResultType ps = CallAPI<paymentsSummaryResultType>(ZillowURI.RegionChildren, p);
 
                 if (ps == null)
                     throw new NullReferenceException("paymentsSummaryResultType API value is null");
@@ -375,7 +369,7 @@ namespace Zillow.Services
                     {"citystatezip", citystatezip}
                 };
 
-                searchresults search = (searchresults)CallAPI(ZillowURI.DeepSearchResults, p, typeof(searchresults));
+                searchresults search = CallAPI<searchresults>(ZillowURI.DeepSearchResults, p);
 
                 if (search == null)
                     throw new NullReferenceException("searchresults API value is null");
@@ -403,7 +397,7 @@ namespace Zillow.Services
                     {"count", count}
                 };
 
-                comps comps = (comps)CallAPI(ZillowURI.DeepComps, p, typeof(comps));
+                comps comps = CallAPI<comps>(ZillowURI.DeepComps, p);
 
                 if (comps == null)
                     throw new NullReferenceException("searchresults API value is null");
@@ -430,7 +424,7 @@ namespace Zillow.Services
                     {"zpid", zpid}
                 };
 
-                updatedPropertyDetails upd = (updatedPropertyDetails)CallAPI(ZillowURI.UpdatedPropertyDetails, p, typeof(updatedPropertyDetails));
+                updatedPropertyDetails upd = CallAPI<updatedPropertyDetails>(ZillowURI.UpdatedPropertyDetails, p);
 
                 if (upd == null)
                     throw new NullReferenceException("searchresults API value is null");

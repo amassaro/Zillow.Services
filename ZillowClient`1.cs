@@ -20,15 +20,11 @@ namespace Zillow.Services
                 // Build HttpClient request
                 using (var httpClient = new HttpClient())
                 {
-
                     // Read XML and Deserialize Object
-                    var u = new UriBuilder(uri);
-                    var query = HttpUtility.ParseQueryString(string.Empty);
-
-                    foreach (string k in parameters.Keys)
-                        query[k] = parameters[k].ToString();
-
-                    u.Query = query.ToString();
+                    var u = new UriBuilder(uri)
+                    {
+                        Query = PrepareQuery(parameters)
+                    };
                     var xml = await httpClient.GetStringAsync(u.Uri);
 
                     XmlSerializer ser = new XmlSerializer(typeof(T));
@@ -44,7 +40,6 @@ namespace Zillow.Services
 
         }
 
-
         #region Public Async Methods
 
         public async Task<searchresults> GetSearchResultsAsync(string address, string citystatezip)
@@ -58,15 +53,7 @@ namespace Zillow.Services
                     {"citystatezip", citystatezip}
                 };
 
-                var results = await CallAPIAsync<searchresults>(ZillowURI.SearchResults, p);
-
-                if (results == null)
-                    throw new NullReferenceException("searchresults API value is null");
-
-                if (int.Parse(results.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", results.message.code, results.message.text));
-
-                return results;
+                return await CallAPIAsync<searchresults>(ZillowURI.SearchResults, p);
             }
             catch (Exception ex)
             {
@@ -85,15 +72,8 @@ namespace Zillow.Services
                     {"zpid", zpid}
                 };
 
-                var zestimate = await CallAPIAsync<zestimateResultType>(ZillowURI.ZEstimate, p);
+                return await CallAPIAsync<zestimateResultType>(ZillowURI.ZEstimate, p);
 
-                if (zestimate == null)
-                    throw new NullReferenceException("zestimate API value is null");
-
-                if (int.Parse(zestimate.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", zestimate.message.code, zestimate.message.text));
-
-                return zestimate;
             }
             catch (Exception ex)
             {
@@ -115,15 +95,8 @@ namespace Zillow.Services
                     {"height", height}
                 };
 
-                var chart = await CallAPIAsync<chart>(ZillowURI.Chart, p);
+                return await CallAPIAsync<chart>(ZillowURI.Chart, p);
 
-                if (chart == null)
-                    throw new NullReferenceException("chart API value is null");
-
-                if (int.Parse(chart.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", chart.message.code, chart.message.text));
-
-                return chart;
             }
             catch (Exception ex)
             {
@@ -143,15 +116,7 @@ namespace Zillow.Services
                     {"count", count}
                 };
 
-                var comps = await CallAPIAsync<comps>(ZillowURI.Comps, p);
-
-                if (comps == null)
-                    throw new NullReferenceException("comps API value is null");
-
-                if (int.Parse(comps.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", comps.message.code, comps.message.text));
-
-                return comps;
+                return await CallAPIAsync<comps>(ZillowURI.Comps, p);
             }
             catch (Exception ex)
             {
@@ -178,15 +143,7 @@ namespace Zillow.Services
                     {"chartVariant", chartVariant}
                 };
 
-                var regionchart = await CallAPIAsync<regionchart>(ZillowURI.RegionChart, p);
-
-                if (regionchart == null)
-                    throw new NullReferenceException("regionchart API value is null");
-
-                if (int.Parse(regionchart.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", regionchart.message.code, regionchart.message.text));
-
-                return regionchart;
+                return await CallAPIAsync<regionchart>(ZillowURI.RegionChart, p);
             }
             catch (Exception ex)
             {
@@ -208,15 +165,7 @@ namespace Zillow.Services
                     {"neighborhood", neighborhood}
                 };
 
-                demographicsResultType demo = await CallAPIAsync<demographicsResultType>(ZillowURI.DemoGraphics, p);
-
-                if (demo == null)
-                    throw new NullReferenceException("demographicsResultType API value is null");
-
-                if (int.Parse(demo.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", demo.message.code, demo.message.text));
-
-                return demo;
+                return await CallAPIAsync<demographicsResultType>(ZillowURI.DemoGraphics, p);
             }
             catch (Exception ex)
             {
@@ -238,15 +187,7 @@ namespace Zillow.Services
                     {"childtype", childtype}
                 };
 
-                regionchildrenResultType rc = await CallAPIAsync<regionchildrenResultType>(ZillowURI.RegionChildren, p);
-
-                if (rc == null)
-                    throw new NullReferenceException("regionchildrenResultType API value is null");
-
-                if (int.Parse(rc.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", rc.message.code, rc.message.text));
-
-                return rc;
+                return await CallAPIAsync<regionchildrenResultType>(ZillowURI.RegionChildren, p);
             }
             catch (Exception ex)
             {
@@ -267,15 +208,7 @@ namespace Zillow.Services
                     {"callback", callback}
                 };
 
-                rateSummaryResultType rs = await CallAPIAsync<rateSummaryResultType>(ZillowURI.RateSummary, p);
-
-                if (rs == null)
-                    throw new NullReferenceException("rateSummaryResultType API value is null");
-
-                if (int.Parse(rs.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", rs.message.code, rs.message.text));
-
-                return rs;
+                return await CallAPIAsync<rateSummaryResultType>(ZillowURI.RateSummary, p);
             }
             catch (Exception ex)
             {
@@ -299,15 +232,7 @@ namespace Zillow.Services
                     {"callback", callback}
                 };
 
-                paymentsSummaryResultType ps = await CallAPIAsync<paymentsSummaryResultType>(ZillowURI.RegionChildren, p);
-
-                if (ps == null)
-                    throw new NullReferenceException("paymentsSummaryResultType API value is null");
-
-                if (int.Parse(ps.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", ps.message.code, ps.message.text));
-
-                return ps;
+                return await CallAPIAsync<paymentsSummaryResultType>(ZillowURI.RegionChildren, p);
             }
             catch (Exception ex)
             {
@@ -327,15 +252,7 @@ namespace Zillow.Services
                     {"citystatezip", citystatezip}
                 };
 
-                searchresults search = await CallAPIAsync<searchresults>(ZillowURI.DeepSearchResults, p);
-
-                if (search == null)
-                    throw new NullReferenceException("searchresults API value is null");
-
-                if (int.Parse(search.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", search.message.code, search.message.text));
-
-                return search;
+                return await CallAPIAsync<searchresults>(ZillowURI.DeepSearchResults, p);
             }
             catch (Exception ex)
             {
@@ -355,15 +272,7 @@ namespace Zillow.Services
                     {"count", count}
                 };
 
-                comps comps = await CallAPIAsync<comps>(ZillowURI.DeepComps, p);
-
-                if (comps == null)
-                    throw new NullReferenceException("comps API value is null");
-
-                if (int.Parse(comps.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", comps.message.code, comps.message.text));
-
-                return comps;
+                return await CallAPIAsync<comps>(ZillowURI.DeepComps, p);
             }
             catch (Exception ex)
             {
@@ -382,15 +291,7 @@ namespace Zillow.Services
                     {"zpid", zpid}
                 };
 
-                updatedPropertyDetails upd = await CallAPIAsync<updatedPropertyDetails>(ZillowURI.UpdatedPropertyDetails, p);
-
-                if (upd == null)
-                    throw new NullReferenceException("updatedPropertyDetails API value is null");
-
-                if (int.Parse(upd.message.code) != 0)
-                    throw new Exception(string.Format("Zillow Error #{0}: {1}", upd.message.code, upd.message.text));
-
-                return upd;
+                return await CallAPIAsync<updatedPropertyDetails>(ZillowURI.UpdatedPropertyDetails, p);
             }
             catch (Exception ex)
             {

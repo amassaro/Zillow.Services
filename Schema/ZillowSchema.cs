@@ -4546,7 +4546,7 @@ namespace Zillow.Services.Schema
 
         private uint countField;
 
-        private updatedPropertyDetailsResponseImagesLings lingsField;
+        private updatedPropertyDetailsResponseImage imageField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -4564,15 +4564,15 @@ namespace Zillow.Services.Schema
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public updatedPropertyDetailsResponseImagesLings lings
+        public updatedPropertyDetailsResponseImage image
         {
             get
             {
-                return this.lingsField;
+                return this.imageField;
             }
             set
             {
-                this.lingsField = value;
+                this.imageField = value;
             }
         }
     }
@@ -4583,7 +4583,7 @@ namespace Zillow.Services.Schema
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.zillow.com/static/xsd/UpdatedPropertyDetails.xsd")]
-    public partial class updatedPropertyDetailsResponseImagesLings
+    public partial class updatedPropertyDetailsResponseImage
     {
 
         private string urlField;
@@ -4618,7 +4618,7 @@ namespace Zillow.Services.Schema
 
         private bool bedroomsFieldSpecified;
 
-        private uint bathroomsField;
+        private decimal bathroomsField;
 
         private bool bathroomsFieldSpecified;
 
@@ -4724,7 +4724,7 @@ namespace Zillow.Services.Schema
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public uint bathrooms
+        public decimal bathrooms
         {
             get
             {
